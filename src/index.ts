@@ -3,7 +3,8 @@ import 'dotenv/config';
 import { User } from './user';
 import { getUsers } from './controllers/getUsers.js';
 import { getUser } from './controllers/getUser.js';
-// import { v4 as uuidv4} from 'uuid';
+import { addUser } from './controllers/addUser.js';
+
 const PORT: number = +process.env.PORT || 4000;
 const mainData: User[] = [
   {
@@ -20,6 +21,18 @@ http
       getUsers(res, mainData);
     } else if (urlArray.length < 5 && req.method === 'GET') {
       getUser(res, mainData, urlArray[3]);
+    } else if (req.url === '/api/users' && req.method === 'POST') {
+      let data: string = '';
+      req.on('data', (chunk) => {
+        data += chunk;
+      });
+      req.on('end', () => {
+        addUser(JSON.parse(data.toString()), res, mainData);
+      });
+      req.on('error', () => {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ message: 'Server error' }));
+      });
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Not found' }));
