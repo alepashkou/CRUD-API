@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start:dev": "nodemon --watch src --exec ts-node-esm src/index.ts",
-    "start:prod": "tsc --build && node dist/index.js"
+    "start:prod": "tsc --build && node dist/index.js",
+    "start:multi": "tsc --build && node dist/cluster.js"
   },
   "keywords": [],
   "author": "alepashkou",
