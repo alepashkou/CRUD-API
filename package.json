@@ -7,7 +7,7 @@
     "start:dev": "nodemon --watch src --exec ts-node-esm src/index.ts",
     "start:prod": "tsc --build && node dist/index.js",
     "start:multi": "tsc --build && node dist/cluster.js",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest --forceExit"
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && npx jest"
   },
   "keywords": [],
   "author": "alepashkou",

@@ -1,6 +1,7 @@
 import { User } from '../user';
 import * as http from 'http';
 import { v4 as uuidv4 } from 'uuid';
+
 export const validateUser = (user: User): string[] => {
   const errors: string[] = [];
   if (!user.username) {
@@ -18,7 +19,7 @@ export const addUser = (
   reqData: User,
   res: http.ServerResponse,
   data: User[]
-) => {
+): void => {
   if (validateUser(reqData).length === 0) {
     const newUser: User = { id: uuidv4(), ...reqData };
     data.push(newUser);

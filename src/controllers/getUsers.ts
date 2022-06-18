@@ -1,7 +1,7 @@
 import { User } from '../user';
 import * as http from 'http';
 
-export const getUsers = async (res: http.ServerResponse, data: User[]) => {
+export const getUsers = (res: http.ServerResponse, data: User[]): void => {
   try {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(data));

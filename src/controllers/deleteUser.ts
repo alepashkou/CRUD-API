@@ -6,7 +6,7 @@ export const deleteUser = (
   uuid: string,
   res: http.ServerResponse,
   data: User[]
-) => {
+): number | boolean => {
   if (uuidValidate(uuid)) {
     const userIndex: number = data.findIndex((user) => user.id === uuid);
     if (userIndex !== -1) {

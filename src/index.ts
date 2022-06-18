@@ -16,7 +16,7 @@ const mainData: User[] = [
   //   hobbies: ['Sports', 'Cooking'],
   // },
 ];
-export const server = http.createServer(
+export const server: http.Server = http.createServer(
   (req: http.IncomingMessage, res: http.ServerResponse) => {
     const urlArray: string[] = req.url.split('/');
     if (req.url === '/api/users' && req.method === 'GET') {
@@ -52,7 +52,7 @@ export const server = http.createServer(
     } else if (urlArray.length < 5 && req.method === 'DELETE') {
       const index = deleteUser(urlArray[3], res, mainData);
       if (index !== false) {
-        mainData.splice(index, 1);
+        mainData.splice(+index, 1);
       }
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' });

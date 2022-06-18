@@ -2,11 +2,11 @@ import { User } from '../user';
 import * as http from 'http';
 import { validate as uuidValidate } from 'uuid';
 
-export const getUser = async (
+export const getUser = (
   res: http.ServerResponse,
   data: User[],
   id: string
-) => {
+): void => {
   if (uuidValidate(id)) {
     const user = data.find((user) => user.id === id);
     if (user) {
