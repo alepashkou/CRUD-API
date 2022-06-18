@@ -9,15 +9,15 @@ import { deleteUser } from './controllers/deleteUser.js';
 
 const PORT: number = +process.env.PORT || 4000;
 const mainData: User[] = [
-  {
-    id: 'a889e0f7-d734-4e4e-ab66-192047a97c89',
-    username: 'John',
-    age: 30,
-    hobbies: ['Sports', 'Cooking'],
-  },
+  // {
+  //   id: 'a889e0f7-d734-4e4e-ab66-192047a97c89',
+  //   username: 'John',
+  //   age: 30,
+  //   hobbies: ['Sports', 'Cooking'],
+  // },
 ];
-http
-  .createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
+export const server = http.createServer(
+  (req: http.IncomingMessage, res: http.ServerResponse) => {
     const urlArray: string[] = req.url.split('/');
     if (req.url === '/api/users' && req.method === 'GET') {
       getUsers(res, mainData);
@@ -58,9 +58,10 @@ http
       res.writeHead(404, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'Not found' }));
     }
-  })
-  .listen(PORT, () => {
-    console.log(
-      `Server is listening on port ${PORT}, process id is ${process.pid}`
-    );
-  });
+  }
+);
+server.listen(PORT, () => {
+  console.log(
+    `Server is listening on port ${PORT}, process id is ${process.pid}`
+  );
+});
