@@ -29,10 +29,10 @@
 
 ## Endpoints
 
-- **GET** `api/user` - Get all users.
-- **GET** `api/user/${userId}` - Get current user by userId.
-- **POST** `api/user` - Create user.
-- **PUT** `api/user/{userId}` - Update user info
-- **DELETE** `api/user/${userId}` - Delete user.
+- **GET** `api/users` - Get all users.
+- **GET** `api/users/${userId}` - Get current user by userId.
+- **POST** `api/users` - Create user.
+- **PUT** `api/users/{userId}` - Update user info
+- **DELETE** `api/users/${userId}` - Delete user.
 
 #### If you have any questions, write me in the discord. (Krakozyabchik#0988)

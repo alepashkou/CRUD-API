@@ -36,7 +36,11 @@ export const server: http.Server = http.createServer(
           res.end(JSON.stringify({ message: 'Server error' }));
         }
       });
-    } else if (urlArray.length < 5 && req.method === 'PUT') {
+    } else if (
+      urlArray.length > 3 &&
+      urlArray.length < 5 &&
+      req.method === 'PUT'
+    ) {
       let data: string = '';
       req.on('data', (chunk) => {
         data += chunk;
@@ -49,7 +53,11 @@ export const server: http.Server = http.createServer(
           res.end(JSON.stringify({ message: 'Server error' }));
         }
       });
-    } else if (urlArray.length < 5 && req.method === 'DELETE') {
+    } else if (
+      urlArray.length > 3 &&
+      urlArray.length < 5 &&
+      req.method === 'DELETE'
+    ) {
       const index = deleteUser(urlArray[3], res, mainData);
       if (index !== false) {
         mainData.splice(+index, 1);
