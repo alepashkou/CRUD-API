@@ -25,6 +25,7 @@ export const addUser = (
     data.push(newUser);
     res.writeHead(201, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(newUser));
+    process.send(data);
   } else {
     res.writeHead(400, { 'Content-Type': 'application/json' });
     res.end(

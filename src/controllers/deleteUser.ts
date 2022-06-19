@@ -12,6 +12,7 @@ export const deleteUser = (
     if (userIndex !== -1) {
       res.writeHead(204, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ message: 'User Deleted' }));
+      process.send(data);
       return userIndex;
     } else {
       res.writeHead(404, { 'Content-Type': 'application/json' });

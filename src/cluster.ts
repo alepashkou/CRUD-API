@@ -1,11 +1,20 @@
 import cluster from 'cluster';
-import os from 'os';
+import { cpus } from 'os';
+import { User } from './user.js';
 
 if (cluster.isPrimary) {
-  const cpuCount = os.cpus().length;
-  for (let i = 0; i < cpuCount; i++) {
-    cluster.fork(cpuCount);
-  }
+  const arrayWorkers = [];
+  let mainData: User[] = [];
+  cpus().forEach(() => {
+    const worker = cluster.fork();
+    arrayWorkers.push(worker);
+    worker.on('message', (newData) => {
+      mainData = newData;
+      arrayWorkers.forEach((worker) => {
+        worker.send(mainData);
+      });
+    });
+  });
 }
 if (cluster.isWorker) {
   import('./index.js');

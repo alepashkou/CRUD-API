@@ -1,13 +1,16 @@
 import http from 'http';
 import 'dotenv/config';
+import cluster from 'cluster';
 import { getUsers } from './controllers/getUsers.js';
 import { getUser } from './controllers/getUser.js';
 import { addUser } from './controllers/addUser.js';
 import { updateUser } from './controllers/updateUser.js';
 import { deleteUser } from './controllers/deleteUser.js';
-import mainData from './data/db.js';
+import { User } from './user.js';
 
 const PORT: number = +process.env.PORT || 4000;
+
+let mainData: User[] = [];
 
 export const server: http.Server = http.createServer(
   (req: http.IncomingMessage, res: http.ServerResponse) => {
@@ -62,3 +65,8 @@ server.listen(PORT, () => {
     `Server is listening on port ${PORT}, process id is ${process.pid}`
   );
 });
+if (cluster.isWorker) {
+  process.on('message', (data: User[]) => {
+    mainData = data;
+  });
+}
